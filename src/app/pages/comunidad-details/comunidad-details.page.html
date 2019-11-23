@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>
+            Finca2Admin - Detalle de Comunidad
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-list lines="full">
+            <ion-item *ngIf="comunidad">
+                <ion-label color="secondary" position="floating">Nombre</ion-label>
+                <ion-input type="text" placeholder="Escribe Algo" [(ngModel)]="comunidad.nombre" autofocus="true"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="comunidad">
+                <ion-label color="secondary" position="floating">Más Información</ion-label>
+                <ion-input type="text" placeholder="Escribe Algo" [(ngModel)]="comunidad.direccion"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <ion-button expand="block" shape="round" color="tertiary" fill="outline" (click)="guardar()">
+            <ion-icon slot="start" name="save"></ion-icon>
+            Guardar
+        </ion-button>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="danger" (click)="borrar(comunidadId)">
+            <ion-icon name="trash"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>
+            Finca2Admin
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-segment (ionChange)="segmentChanged($event.detail.value)">
+        <ion-segment-button value="pendientes">
+            <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="realizadas">
+            <ion-label>Realizadas</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+    <ion-card *ngIf="!datos" color="danger">
+        <img src="../../../assets/no-data.png" />
+        <ion-card-header class="ion-text-center">
+            <ion-card-title> <b> No hay tareas </b> </ion-card-title>
+        </ion-card-header>
+    </ion-card>
+
+
+    <ion-list>
+        <ion-list>
+            <ion-item-sliding *ngFor="let todo of todos">
+                <ion-item lines="inset" button [routerLink]="['/todo-details', todo.id]">
+                    <ion-label>
+                        <h2> <b> {{todo.nombre}} </b> </h2>
+                        <p> {{ todo.creada | date: 'short' }}</p>
+                    </ion-label>
+                    <ion-badge color="warning" slot="end">
+                        {{ todo.prioridad }}
+                    </ion-badge>
+                </ion-item>
+                <ion-item-options side="end">
+                    <ion-item-option (click)="borrar(todo.id)" color="danger">
+                        <ion-icon name="trash"></ion-icon>
+                    </ion-item-option>
+                    <ion-item-option color="primary" (click)="realizada(todo)" color="success">
+                        <ion-icon slot="start" name="checkmark"></ion-icon>
+                    </ion-item-option>
+                </ion-item-options>
+
+
+            </ion-item-sliding>
+        </ion-list>
+    </ion-list>
+
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button routerLink="/todo-details" routerDirection="forward">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
